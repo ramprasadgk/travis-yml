@@ -23,11 +23,16 @@ module Travis
 
         def request(method, name)
           resp = connection.send(method) { |req| yield(req) }
+          logger.info resp.body
           JSON.parse(resp.body)['data']
         end
 
         def config
           Yml.config
+        end
+
+        def logger
+          Yml.logger
         end
       end
     end
