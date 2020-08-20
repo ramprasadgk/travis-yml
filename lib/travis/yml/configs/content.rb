@@ -14,7 +14,9 @@ module Travis
         private
         
         def fetch
+          puts "Fetch #{repo.inspect}"
           data = client.content(id: repo.id, path: path, ref: ref)
+          puts "received #{data}"
           decode64(data['content'].to_s)
         rescue Faraday::ClientError => e
           api_error('RemoteVcs', :file, [repo.slug, self.path].join(':'), OpenStruct.new(e.response))
