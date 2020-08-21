@@ -23,8 +23,7 @@ module Travis
 
         def request(method, name)
           resp = connection.send(method) { |req| yield(req) }
-          logger.info resp.body
-          JSON.parse(resp.body)['data']
+          JSON.parse(resp.body)
         end
 
         def config
